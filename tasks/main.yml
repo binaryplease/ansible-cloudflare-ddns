@@ -1,2 +1,30 @@
 ---
 # tasks file for ansible-cloudflare-ddns
+# - name: Install necessary packages
+#   pacman:
+#     name:
+#       - dnsutils
+#     state: latest
+
+- name: Make sure /var/lib/cloudflare-ddns exists
+  file:
+    path: /var/lib/cloudflare-ddns
+    state: directory
+    owner: root
+    group: root
+
+- name: Write update.sh to /var/lib/cloudflare-ddns/update.sh
+  template:
+    src: update.sh.j2
+    dest: /var/lib/cloudflare-ddns/update.sh
+    owner: root
+    group: root
+    mode: '0755'
+
+# - name: Setup cronjob for to run backup
+#   cron:
+#     name: cloudflare-ddns
+#     minute: "*/{{cloudflare_ddns_minutes}}"
+#     user: root
+#     job: "/var/lib/cloudflare-ddns/update.sh >> /var/log/cloudflare_ddns.log 2>&1"
+
