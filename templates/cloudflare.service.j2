@@ -1,15 +1,4 @@
 [Unit]
-Description=Cloudflare DDNS timer
-
-[Timer]
-OnBootSec=1
-OnUnitActiveSec=5min
-Persistent=true
-
-[Install]
-WantedBy=basic.target
-[root@birne system]# cat cloudflare.service
-[Unit]
 Description=Check and set DDNS IPs
 Requires=network-online.target
 After=network-online.target
