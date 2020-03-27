@@ -1,0 +1,10 @@
+[Unit]
+Description=Cloudflare DDNS timer
+
+[Timer]
+OnBootSec=1
+OnUnitActiveSec=5min
+Persistent=true
+
+[Install]
+WantedBy=basic.target

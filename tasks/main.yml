@@ -21,9 +21,16 @@
     group: root
     mode: '0755'
 
-- name: Setup cronjob for to run backup
-  cron:
-    name: cloudflare-ddns
-    minute: "*/{{cloudflare_ddns_minutes}}"
-    user: root
-    job: "/var/lib/cloudflare-ddns/update.sh >> /var/log/cloudflare_ddns.log 2>&1"
+- name: "Template cloudflare.service to /etc/systemd/system/cloudflare.service"
+  template:
+    src: "cloudflare.service.j2"
+    dest: "/etc/systemd/system/cloudflare.service"
+    mode: '0644'
+
+
+- name: "Template cloudflare.timer to /etc/systemd/system/cloudflare.timer"
+  template:
+    src: "cloudflare.timer.j2"
+    dest: "/etc/systemd/system/cloudflare.timer"
+    mode: '0644'
+
