@@ -34,3 +34,10 @@
     dest: "/etc/systemd/system/cloudflare.timer"
     mode: '0644'
 
+- name: "Enable cloudflare.timer on startup"
+  systemd:
+    name: "cloudflare.timer"
+    enabled: yes
+    daemon_reload: yes
+    state: restarted
+    masked: no
